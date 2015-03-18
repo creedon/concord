@@ -411,6 +411,7 @@ function ConcordOutline(container, options) {
 	this.init();
 	}
 function ConcordEditor(root, concordInstance) {
+    var selectionStart;
 	this.makeNode = function(){
 		var node = $("<li></li>");
 		node.addClass("concord-node");
@@ -616,37 +617,30 @@ function ConcordEditor(root, concordInstance) {
 				node.parents(".concord-node.selected").removeClass("selected");
 				node.find(".concord-node.selected").removeClass("selected");
 				}
+            //3/13/15 by TAC -- add ability to contract selection, track the selection start to determine the direction (forward or reverse) of the selection
 			if(multiple && multipleRange) {
-				var prevNodes = node.prevAll(".selected");
-				if(prevNodes.length > 0) {
-					var stamp = false;
-					node.prevAll().reverse().each(function() {
-						if($(this).hasClass("selected")) {
-							stamp = true;
-							} else if(stamp) {
-								$(this).addClass("selected");
-								}
-						});
+				if(this.selectionStart.nextAll('.concord-cursor').length != 0) {
+					//forward selection
+					node.nextAll('.selected').removeClass('selected');
+					$(this.selectionStart).nextUntil(node).addClass('selected');
 					} else {
-						var nextNodes = node.nextAll(".selected");
-						if(nextNodes.length > 0) {
-							var stamp = true;
-							node.nextAll().each(function() {
-								if($(this).hasClass("selected")) {
-									stamp = false;
-									} else if(stamp) {
-										$(this).addClass("selected");
-										}
-								});
-							}
+						//reverse selection
+						node.prevAll('.selected').removeClass('selected');
+						$(this.selectionStart).prevUntil(node).addClass('selected');
 						}
-				}
+				} else {
+					this.selectionStart = node;
+					}
 			var text = node.children(".concord-wrapper:first").children(".concord-text:first");
 			if(text.hasClass("editing")) {
 				text.removeClass("editing");
 				}
 			//text.blur();
-			node.addClass("selected");
+            if(multiple && !multipleRange && node.hasClass('selected')){ // 3/13/15 by TAC -- discontiguous selections
+                node.removeClass('selected');
+                } else {
+                    node.addClass('selected');
+                    }
 			if(text.text().length>0){
 				//root.data("currentChange", root.children().clone());
 				}
