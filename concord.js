@@ -3113,7 +3113,8 @@ function Op(opmltext){
 					keyCaptured = false;
 				}
 			if(!keyCaptured) {
-				if((event.which >= 32) && ((event.which < 112) || (event.which > 123)) && (event.which < 1000) && !commandKey) {
+                // 3/13/15 by TAC -- fix for text loss when using page up/down keys
+				if((event.which >= 32) && ((event.which < 112) || (event.which > 123)) && (event.which < 1000) && !commandKey && !((event.which == 33) || (event.which == 34))) {
 					var node = concordInstance.op.getCursor();
 					if(concordInstance.op.inTextMode()) {
 						if(!node.hasClass("dirty")){
