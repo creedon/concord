@@ -181,6 +181,9 @@ var defaultUtilsOutliner = "#outliner";
 	function opVisitAll (callback) { //9/13/13 by DW
 		return ($(defaultUtilsOutliner).concord ().op.visitAll (callback));
 		}
+	function opVisitSubs (callback) { // 3/13/15 by TAC
+		return ($(defaultUtilsOutliner).concord ().op.visitSubs (callback));
+		}
 	function opWipe () { //9/14/13 by DW
 		return ($(defaultUtilsOutliner).concord ().op.wipe ());
 		}

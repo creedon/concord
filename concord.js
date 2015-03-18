@@ -2416,6 +2416,26 @@ function ConcordOp(root, concordInstance, _cursor) {
 			});
 		return true;
 		};
+	this.visitSubs = function(lcb, icb, ocb){ // 3/13/15 by TAC
+        var levelNum = 0;
+        var visitSub = function(sub){
+            lcb(sub, levelNum);
+            if(sub.countSubs() > 0){
+                if(icb != undefined){
+                    icb(levelNum);
+                    }
+                levelNum++;
+                sub.visitLevel(visitSub); 
+                levelNum--; 
+                if (ocb != undefined) {
+                    ocb(levelNum);
+                    }
+                }
+            return true;
+            };
+        this.visitLevel (visitSub);
+		return true;
+        };
 	this.visitToSummit = function(cb){
 		var cursor = this.getCursor();
 		while(cb(this.setCursorContext(cursor))){
@@ -2710,12 +2730,22 @@ function ConcordScript(root, concordInstance){
 		};
 	this.makeComment = function(){
 		concordInstance.op.attributes.setOne("isComment", "true");
-		concordInstance.op.getCursor().addClass("concord-comment");
+        // 3/13/15 by TAC -- comment descendants
+        concordInstance.op.visitSubs(function(op) {
+            op.attributes.setOne('isComment', 'true');
+            });
+        // 3/13/15 by TAC -- comment cursor and appropiate descendants
+		concordInstance.op.getCursor().find('li').addBack().addClass('concord-comment');
 		return true;
 		};
 	this.unComment = function(){
 		concordInstance.op.attributes.setOne("isComment", "false");
-		concordInstance.op.getCursor().removeClass("concord-comment");
+        // 3/13/15 by TAC -- uncomment descendants
+        concordInstance.op.visitSubs(function(op) {
+            op.attributes.setOne('isComment', 'false');
+            });
+        // 3/13/15 by TAC -- uncomment cursor and appropiate descendants
+		concordInstance.op.getCursor().find('li.concord-comment').addBack().removeClass('concord-comment');
 		return true;
 		};
 	}
