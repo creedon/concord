@@ -819,22 +819,21 @@ function ConcordEditor(root, concordInstance) {
 			});
 		};
 	this.escape = function(s){
-		var h = $("<div/>").text(s).html();
-		h = h.replace(/\u00A0/g, " ");
+		var h = s.replace(/\u00A0/g, ' ');
 		if(concordInstance.op.getRenderMode()){ // Render HTML if op.getRenderMode() returns true - 2/17/13 by KS
-			var allowedTags = ["b","strong","i","em","a","img","strike","del"];
-			for(var tagIndex in allowedTags){
-				var tag = allowedTags[tagIndex];
-				if (tag == "img"){
-					h = h.replace(new RegExp("&lt;"+tag+"((?!&gt;).+)(/)?&gt;","gi"),"<"+tag+"$1"+"/>");
-					}
-				else if (tag=="a"){
-					h = h.replace(new RegExp("&lt;"+tag+"((?!&gt;).*?)&gt;((?!&lt;/"+tag+"&gt;).+?)&lt;/"+tag+"&gt;","gi"),"<"+tag+"$1"+">$2"+"<"+"/"+tag+">");
-					}
-				else {
-					h = h.replace(new RegExp("&lt;"+tag+"&gt;((?!&lt;/"+tag+"&gt;).+?)&lt;/"+tag+"&gt;","gi"),"<"+tag+">$1"+"<"+"/"+tag+">");
-					}
-				}
+			// 3/17/15 by TAC -- use jQuery as a more robust method to escape text
+			var allowedTags = 'b, strong, i, em, a, img, strike, del';
+			h = $('<div/>').html(h);
+			var e = h.find(allowedTags).replaceWith('[[element]]');
+			h = h.html()
+				.replace(/&/g, '&amp;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;')
+				.replace (/</g, '&lt;')
+				.replace ( />/g, '&gt;');
+			e.each(function(){
+				h = h.replace('[[element]]', this.outerHTML)
+                });
 			}
 		return h;
 		};
