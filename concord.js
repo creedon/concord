@@ -819,7 +819,7 @@ function ConcordEditor(root, concordInstance) {
 			});
 		};
 	this.escape = function(s){
-		var h = s.replace(/\u00A0/g, ' ');
+		var h = s.replace(/[\n\r\u00A0]/g, ' '); // 3/18/15 by TAC -- \n and \r may display properly in browser when initially entered but don't survive when reloaded via xmlToOutline 
 		if(concordInstance.op.getRenderMode()){ // Render HTML if op.getRenderMode() returns true - 2/17/13 by KS
 			// 3/17/15 by TAC -- use jQuery as a more robust method to escape text
 			var allowedTags = 'b, strong, i, em, a, img, strike, del';
