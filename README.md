@@ -42,7 +42,7 @@ Here's an important 11-minute <a href="http://scripting.com/2013/09/17/important
 
 ### Example 0: The bare minimum
 
-This <a href="concord/blob/master/example0/index.html">example</a> has the bare minimum to add an outliner to an existing app.
+This <a href="./concord/blob/master/example0/index.html">example</a> has the bare minimum to add an outliner to an existing app.
 
 This saves developers the trouble of having to factor it out of Example 1, below.
 
@@ -52,7 +52,7 @@ You can try it out <a href="http://static.smallpicture.com/concord/example0/inde
 
 ### Example 1: Hello Outliner
 
-This <a href="concord/blob/master/example1/index.html">example</a> is a functional outliner, with most of the capabilities of the Little Outliner app and the same basic approach. You edit a single outline, saved in local storage, so it's there when you come back to it, but only on that machine.
+This <a href="./concord/blob/master/example1/index.html">example</a> is a functional outliner, with most of the capabilities of the Little Outliner app and the same basic approach. You edit a single outline, saved in local storage, so it's there when you come back to it, but only on that machine.
 
 It has a simple menubar, with menus containing Outliner commands, links to OPML documents you can view and edit, and links to docs.
 
@@ -62,7 +62,7 @@ You can try it out <a href="http://static.smallpicture.com/concord/example1/inde
 
 ### Example 2: Small Picture Reader
 
-We've released the <a href="concord/blob/master/example2/index.html">source</a> for <a href="http://docs.fargo.io/fargo/reader">Small Picture Reader</a> under the GPL as part of the Concord release.
+We've released the <a href="./concord/blob/master/example2/index.html">source</a> for <a href="http://docs.fargo.io/fargo/reader">Small Picture Reader</a> under the GPL as part of the Concord release.
 
 This app provides a way to read any OPML file even if you aren't using an outliner.
 
@@ -82,7 +82,7 @@ If you want to run the app, <a href="http://static.smallpicture.com/concord/exam
 
 I keep a log of work I do on Concord, in an <a href="https://raw.github.com/scripting/concord/master/opml/worknotes.opml">outline</a> of course. 
 
-There's a <a href="concord/blob/master/worknotes.md">markdown rendering</a> of the worknotes file. 
+There's a <a href="./concord/blob/master/worknotes.md">markdown rendering</a> of the worknotes file. 
 
 
 
