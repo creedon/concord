@@ -42,7 +42,7 @@ Here's an important 11-minute <a href="http://scripting.com/2013/09/17/important
 
 ### Example 0: The bare minimum
 
-This <a href="./concord/blob/master/example0/index.html">example</a> has the bare minimum to add an outliner to an existing app.
+This <a href="example0/index.html">example</a> has the bare minimum to add an outliner to an existing app.
 
 This saves developers the trouble of having to factor it out of Example 1, below.
 
